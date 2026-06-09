@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Decoder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>SUPER DECODER</h1>
+
+    <div id="guess" class="guess">
+        <div class="slot"></div>
+        <div class="slot"></div>
+        <div class="slot"></div>
+        <div class="slot"></div>
+    </div>
+
+    <div class="colors">
+        <button class="color red" onclick="addColor(1)"></button>
+        <button class="color blue" onclick="addColor(2)"></button>
+        <button class="color green" onclick="addColor(3)"></button>
+        <button class="color yellow" onclick="addColor(4)"></button>
+    </div>
+
+    <div class="buttons">
+        <button onclick="submitGuess()">ENVIAR</button>
+        <button onclick="clearGuess()">BORRAR</button>
+        <button onclick="newGame()">NUEVO JUEGO</button>
+    </div>
+
+    <div id="result"></div>
+
+    <h2>Historial</h2>
+    <div id="history"></div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
