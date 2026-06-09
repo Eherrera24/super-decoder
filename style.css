@@ -1,0 +1,54 @@
+body{
+    background:#0d1117;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container{
+    max-width:600px;
+    margin:auto;
+    padding:20px;
+}
+
+.guess{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:20px;
+}
+
+.slot{
+    width:60px;
+    height:60px;
+    background:#222;
+    border-radius:10px;
+}
+
+.colors{
+    margin:20px;
+}
+
+.color{
+    width:70px;
+    height:70px;
+    border:none;
+    border-radius:15px;
+    margin:5px;
+}
+
+.red{background:red;}
+.blue{background:blue;}
+.green{background:limegreen;}
+.yellow{background:gold;}
+
+.buttons button{
+    margin:5px;
+    padding:10px 20px;
+    font-size:16px;
+}
+
+#history{
+    text-align:left;
+    margin-top:20px;
+}
