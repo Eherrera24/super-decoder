@@ -2,42 +2,33 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Super Decoder</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="device">
-
-    <div class="board">
-
-        <div id="rows"></div>
-
-        <div id="hints"></div>
-
-    </div>
-
-    <div class="palette">
-
-        <button class="color red" onclick="addColor(1)"></button>
-        <button class="color yellow" onclick="addColor(2)"></button>
-        <button class="color purple" onclick="addColor(3)"></button>
-        <button class="color cyan" onclick="addColor(4)"></button>
-
-    </div>
-
-    <div class="controls">
-        <button onclick="submitGuess()">ENVIAR</button>
-        <button onclick="clearGuess()">BORRAR</button>
-        <button onclick="newGame()">NUEVO</button>
-    </div>
-
-    <div id="status"></div>
-
+  <div class="top"></div>
+  <div class="board-wrap">
+    <div id="board" class="board"></div>
+    <div id="hints" class="hints"></div>
+  </div>
+  <div class="bottom">
+    <div id="display">001</div>
+    <div id="knob" class="knob">⟳</div>
+  </div>
+  <div class="palette">
+    <button onclick="pick(1)" class="c r"></button>
+    <button onclick="pick(2)" class="c y"></button>
+    <button onclick="pick(3)" class="c p"></button>
+    <button onclick="pick(4)" class="c b"></button>
+  </div>
+  <div class="actions">
+    <button onclick="sendGuess()">ENVIAR</button>
+    <button onclick="clearGuess()">BORRAR</button>
+  </div>
+  <div id="status"></div>
 </div>
-
 <script src="script.js"></script>
-
 </body>
 </html>
