@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Decoder</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Super Decoder</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <h1>SUPER DECODER</h1>
+<div class="device">
 
-    <div id="guess" class="guess">
-        <div class="slot"></div>
-        <div class="slot"></div>
-        <div class="slot"></div>
-        <div class="slot"></div>
+    <div class="board">
+
+        <div id="rows"></div>
+
+        <div id="hints"></div>
+
     </div>
 
-    <div class="colors">
+    <div class="palette">
+
         <button class="color red" onclick="addColor(1)"></button>
-        <button class="color blue" onclick="addColor(2)"></button>
-        <button class="color green" onclick="addColor(3)"></button>
-        <button class="color yellow" onclick="addColor(4)"></button>
+        <button class="color yellow" onclick="addColor(2)"></button>
+        <button class="color purple" onclick="addColor(3)"></button>
+        <button class="color cyan" onclick="addColor(4)"></button>
+
     </div>
 
-    <div class="buttons">
+    <div class="controls">
         <button onclick="submitGuess()">ENVIAR</button>
         <button onclick="clearGuess()">BORRAR</button>
-        <button onclick="newGame()">NUEVO JUEGO</button>
+        <button onclick="newGame()">NUEVO</button>
     </div>
 
-    <div id="result"></div>
+    <div id="status"></div>
 
-    <h2>Historial</h2>
-    <div id="history"></div>
 </div>
 
 <script src="script.js"></script>
