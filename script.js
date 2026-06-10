@@ -3,7 +3,7 @@ let secret=[],current=[],rowIndex=0,level=1;
 function build(){
 let b=document.getElementById('board'),h=document.getElementById('hints');
 b.innerHTML='';h.innerHTML='';
-for(let r=0;r<8;r++){
+for(let r=0;r<7;r++){
 let row=document.createElement('div');row.className='row';
 for(let c=0;c<4;c++){let d=document.createElement('div');d.className='cell';row.appendChild(d);}
 b.appendChild(row);
