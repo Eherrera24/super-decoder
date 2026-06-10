@@ -1,59 +1,96 @@
+const COLORS = {
+    1:"#ff5555",
+    2:"#ffe24d",
+    3:"#b455ff",
+    4:"#57ffff"
+};
+
 let secret = [];
 let current = [];
+let attempts = [];
 
-function generateSecret() {
+function generateSecret(){
     secret = [];
 
-    for (let i = 0; i < 4; i++) {
-        secret.push(Math.floor(Math.random() * 4) + 1);
+    for(let i=0;i<4;i++){
+        secret.push(Math.floor(Math.random()*4)+1);
     }
-
-    console.log("Código:", secret);
 }
 
-generateSecret();
+function createBoard(){
 
-function addColor(color) {
+    const rows = document.getElementById("rows");
+    const hints = document.getElementById("hints");
 
-    if (current.length >= 4) return;
+    rows.innerHTML = "";
+    hints.innerHTML = "";
+
+    for(let r=0;r<8;r++){
+
+        const row = document.createElement("div");
+        row.className = "row";
+
+        for(let c=0;c<4;c++){
+
+            const cell = document.createElement("div");
+            cell.className = "cell";
+
+            row.appendChild(cell);
+        }
+
+        rows.appendChild(row);
+
+        const hint = document.createElement("div");
+        hint.className = "hintRow";
+
+        for(let i=0;i<4;i++){
+
+            const dot = document.createElement("div");
+            dot.className = "dot";
+
+            hint.appendChild(dot);
+        }
+
+        hints.appendChild(hint);
+    }
+}
+
+function addColor(color){
+
+    if(current.length >=4) return;
 
     current.push(color);
 
-    updateBoard();
+    render();
 }
 
-function updateBoard() {
+function clearGuess(){
 
-    let slots = document.querySelectorAll(".slot");
-
-    slots.forEach(slot => {
-        slot.style.background = "#222";
-    });
-
-    current.forEach((c, i) => {
-
-        let color = "";
-
-        if (c === 1) color = "red";
-        if (c === 2) color = "blue";
-        if (c === 3) color = "limegreen";
-        if (c === 4) color = "gold";
-
-        slots[i].style.background = color;
-    });
-}
-
-function clearGuess() {
     current = [];
-    updateBoard();
+
+    render();
 }
 
-function submitGuess() {
+function render(){
 
-    if (current.length !== 4) {
-        alert("Selecciona 4 colores");
-        return;
+    const row = document.querySelectorAll(".row")[attempts.length];
+
+    if(!row) return;
+
+    const cells = row.children;
+
+    for(let i=0;i<4;i++){
+
+        cells[i].style.background =
+            current[i]
+            ? COLORS[current[i]]
+            : "#333";
     }
+}
+
+function submitGuess(){
+
+    if(current.length !==4) return;
 
     let exact = 0;
     let partial = 0;
@@ -61,73 +98,73 @@ function submitGuess() {
     let s = [...secret];
     let g = [...current];
 
-    // Exactos
-    for (let i = 0; i < 4; i++) {
+    for(let i=0;i<4;i++){
 
-        if (g[i] === s[i]) {
+        if(g[i] === s[i]){
+
             exact++;
-            s[i] = null;
-            g[i] = null;
+
+            s[i]=null;
+            g[i]=null;
         }
     }
 
-    // Parciales
-    for (let i = 0; i < 4; i++) {
+    for(let i=0;i<4;i++){
 
-        if (g[i] !== null) {
+        if(g[i]!==null){
 
-            let pos = s.indexOf(g[i]);
+            const pos = s.indexOf(g[i]);
 
-            if (pos !== -1) {
+            if(pos!==-1){
+
                 partial++;
-                s[pos] = null;
+
+                s[pos]=null;
             }
         }
     }
 
-    const colores = {
-        1: "🟥",
-        2: "🟦",
-        3: "🟩",
-        4: "🟨"
-    };
+    attempts.push([...current]);
 
-    let intentoColores = current
-        .map(c => colores[c])
-        .join(" ");
+    const hintRow =
+        document.querySelectorAll(".hintRow")[attempts.length-1];
 
-    let line = `
-        <div class="history-item">
-            <strong>${intentoColores}</strong><br>
-            🎯 ${exact} &nbsp;&nbsp; 🟡 ${partial}
-        </div>
-        <hr>
-    `;
+    let index = 0;
 
-    document.getElementById("history").innerHTML =
-        line + document.getElementById("history").innerHTML;
+    for(let i=0;i<exact;i++){
 
-    if (exact === 4) {
+        hintRow.children[index++]
+            .classList.add("green");
+    }
 
-        document.getElementById("result").innerHTML =
-            "🏆 ¡GANASTE!";
+    for(let i=0;i<partial;i++){
+
+        hintRow.children[index++]
+            .classList.add("white");
+    }
+
+    if(exact===4){
+
+        document.getElementById("status")
+            .innerHTML="🏆 GANASTE";
 
         return;
     }
 
-    current = [];
-    updateBoard();
+    current=[];
+
+    render();
 }
 
-function newGame() {
+function newGame(){
+
+    current=[];
+    attempts=[];
 
     generateSecret();
+    createBoard();
 
-    current = [];
-
-    updateBoard();
-
-    document.getElementById("history").innerHTML = "";
-
-    document.getElementById("result").innerHTML = "";
+    document.getElementById("status").innerHTML="";
 }
+
+newGame();
